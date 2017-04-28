@@ -2,6 +2,8 @@ library(tidyverse)
 library(reshape2)
 
 # nazwy powiatów i gmin
+# plik TERC podstwowa ze strony
+# http://eteryt.stat.gov.pl/eTeryt/rejestr_teryt/udostepnianie_danych/baza_teryt/uzytkownicy_indywidualni/pobieranie/pliki_pelne.aspx?contrast=default
 nazwy_gmi <- read_csv2("TERC_Urzedowy_2017-04-28.csv")
 nazwy_woj <- nazwy_gmi %>% filter(NAZWA_DOD=="województwo") %>% select(WOJ, NAZWA)
 nazwy_pow <- nazwy_gmi %>% filter(NAZWA_DOD %in% c("powiat", "miasto na prawach powiatu", "miasto stołeczne, na prawach powiatu")) %>% select(WOJ, POW, NAZWA) %>% mutate(TERYT=paste0(WOJ, POW))
@@ -10,6 +12,10 @@ nazwy_gmi <- nazwy_gmi %>% filter(!is.na(RODZ)) %>% select(-STAN_NA) %>% mutate(
 
 
 # dane o migracjach
+# plik ze strony http://demografia.stat.gov.pl/bazademografia/Tables.aspx
+# III. MIGRACJE LUDNOŚCI -> Migracje wewnętrzne -> 2015 -> 2g
+
+# obrobiony najpierw w excelu (pozostawiony kod i liczby), a nastepnie:
 # migracje <- read_csv2("pl_mig_2015_00_2g_teryt.csv")
 # migracje_df <- melt(migracje)
 # colnames(migracje_df) <- c("DO", "Z", "Liczba")
@@ -37,6 +43,7 @@ saveRDS(migracje_pow_df, file = "powiaty_migracje.RDS")
 library(rgdal)
 library(broom)
 
+# dane z http://www.codgik.gov.pl/index.php/darmowe-dane/prg.html
 powiaty_mapa <- readOGR("../!mapy_shp/powiaty.shp")
 powiaty_mapa <- tidy(powiaty_mapa, region = "jpt_kod_je")
 

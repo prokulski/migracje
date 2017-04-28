@@ -1,3 +1,7 @@
+# RUN:
+# http://35.163.57.248/shiny/lemur/migracje/
+
+
 library(shiny)
 
 shinyUI(fluidPage(

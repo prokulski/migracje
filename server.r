@@ -1,5 +1,6 @@
 library(tidyverse)
 
+# zapisane wczeniej pliki
 powiaty_nazwy <- readRDS("powiaty_nazwy.RDS")
 powiaty_migracje <- readRDS("powiaty_migracje.RDS")
 powiaty_mapa <- readRDS("powiaty_mapa.RDS")

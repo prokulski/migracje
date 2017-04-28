@@ -6,9 +6,12 @@ library(shiny)
 
 shinyUI(fluidPage(
 
-  titlePanel(div(h1("Migracje Polaków pomiędzy powiatami"),
-             p("powiaty docelowe przy wyjeździe z wybranego powiatu")),
-             windowTitle ="Migracje Polaków"),
+   # kody Google Analytics
+  tags$head(includeScript("google-analytics.js")),
+
+   titlePanel(div(h1("Migracje Polaków pomiędzy powiatami"),
+                  p("powiaty docelowe przy wyjeździe z wybranego powiatu")),
+              windowTitle ="Migracje Polaków"),
 
   fluidRow(
        column(2,
